@@ -9,14 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class UsuarioHelper extends SQLiteOpenHelper {
-    private static final String SQL_CREATE = "CREATE TABLE IF NOT EXISTS"+UsuarioContract.NOME_TABELA+"("+
+    private static final String SQL_CREATE = "CREATE TABLE IF NOT EXISTS "+UsuarioContract.NOME_TABELA+"("+
             UsuarioContract.COLUNA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
             UsuarioContract.COLUNA_NOME+" TEXT,"+
             UsuarioContract.COLUNA_TELEFONE+" TEXT,"+
             UsuarioContract.COLUNA_EMAIL+" TEXT,"+
             UsuarioContract.COLUNA_CPF+" TEXT);";
 
-    private static  final String SQL_DROP = "DROP TABLE IF NOT EXISTS"+UsuarioContract.NOME_TABELA+";";
+    private static  final String SQL_DROP = "DROP TABLE IF NOT EXISTS "+UsuarioContract.NOME_TABELA+";";
     private static final Integer DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "user.db";
 
