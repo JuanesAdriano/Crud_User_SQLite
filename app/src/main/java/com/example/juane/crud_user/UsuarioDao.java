@@ -31,7 +31,7 @@ public class UsuarioDao {
 
     }
 
-    public boolean deleteUsuario(Integer id){
+    public  boolean deleteUsuario(Integer id){
         SQLiteDatabase db = this.usuarioHelper.getWritableDatabase();
 
         String condicao = UsuarioContract.COLUNA_ID+" =?";
@@ -69,6 +69,7 @@ public class UsuarioDao {
                 UsuarioContract.COLUNA_CPF
         };
 
+
         Cursor cursor = db.query(UsuarioContract.NOME_TABELA, colunas, null, null, null, null, UsuarioContract.COLUNA_NOME+" ASC");
         ArrayList<Usuario> users = new ArrayList<Usuario>();
         while(cursor.moveToNext()){
@@ -82,6 +83,30 @@ public class UsuarioDao {
         }
         cursor.close();
         return users;
+    }
+
+    public Usuario retreaveUsuariosById(int id){
+        SQLiteDatabase db = this.usuarioHelper.getReadableDatabase();
+        String[] colunas = {
+                UsuarioContract.COLUNA_ID,
+                UsuarioContract.COLUNA_NOME,
+                UsuarioContract.COLUNA_EMAIL,
+                UsuarioContract.COLUNA_TELEFONE,
+                UsuarioContract.COLUNA_CPF
+        };
+        String condicao = UsuarioContract.COLUNA_ID+" = ?";
+        String[] argumentos ={String.valueOf(id)};
+        Cursor cursor = db.query(UsuarioContract.NOME_TABELA, colunas, condicao, argumentos, null, null, UsuarioContract.COLUNA_NOME+" ASC");
+       Usuario contato = new Usuario();
+        while(cursor.moveToNext()){
+            contato.setId(cursor.getInt(cursor.getColumnIndex(UsuarioContract.COLUNA_ID)));
+            contato.setNome(cursor.getString(cursor.getColumnIndex(UsuarioContract.COLUNA_NOME)));
+            contato.setTelefone(cursor.getString(cursor.getColumnIndex(UsuarioContract.COLUNA_TELEFONE)));
+            contato.setEmail(cursor.getString(cursor.getColumnIndex(UsuarioContract.COLUNA_EMAIL)));
+            contato.setCpf(cursor.getString(cursor.getColumnIndex(UsuarioContract.COLUNA_CPF)));
+        }
+        cursor.close();
+        return contato;
     }
 
 
